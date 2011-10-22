@@ -3,7 +3,7 @@ shell -/bin/zsh
 
 escape "^Zz"
 
-# autodetach on
+autodetach on
 vbell off
 startup_message off
 defscrollback 100000

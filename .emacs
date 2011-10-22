@@ -77,19 +77,17 @@
 (defvar my-face-b-1 'my-face-b-1)
 (defvar my-face-b-2 'my-face-b-2)
 (defvar my-face-u-1 'my-face-u-1)
-
 (defadvice font-lock-mode (before my-font-lock-mode ())
   (font-lock-add-keywords
    major-mode
    '(("	" 0 my-face-b-2 append)
      ("[ 	]+$" 0 my-face-u-1 append)
      )))
-
 (setq-default transient-mark-mode t)
-
 (ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
 (ad-activate 'font-lock-mode)
 
+;; バックアップファイルを作らない
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
