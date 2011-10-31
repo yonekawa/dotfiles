@@ -318,6 +318,7 @@
 ;====================================
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.shd$" . coffee-mode))
+(setq coffee-tab-width 2)
 
 ; shadow
 ;====================================
