@@ -15,14 +15,6 @@
 (setq load-path (cons "~/.emacs.d/auto-install/" load-path))
 
 ;===================================
-; Backup file
-;===================================
-;;; *~
-(setq make-backup-files nil)
-;;; .#*
-(setq auto-save-default nil)
-
-;===================================
 ; Wheel mouse
 ;===================================
 (mouse-wheel-mode)
