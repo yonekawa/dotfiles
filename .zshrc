@@ -40,8 +40,8 @@ alias screen='screen -r'
 alias brewupdate='brew update && brew upgrade'
 
 preexec() {
-    echo -ne "\ek#${1%% *}\e\\"
+#    echo -ne "\ek#${1%% *}\e\\"
 }
 precmd() {
-    echo -ne "\ek$(basename $(pwd))\e\\"
+#    echo -ne "\ek$(basename $(pwd))\e\\"
 }

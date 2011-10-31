@@ -318,7 +318,6 @@
 ;====================================
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.shd$" . coffee-mode))
-(setq coffee-tab-width 4)
 
 ; shadow
 ;====================================
@@ -401,3 +400,13 @@
 
 ;(define-key minibuffer-local-completion-map "\M-a" 'ack)
 (define-key global-map "\M-a" 'ack)
+
+;====================================
+; rst (sphinx)
+;====================================
+(require 'rst)
+(setq auto-mode-alist
+      (append '(("\\.rst$" . rst-mode)
+                ("\\.rest$" . rst-mode)) auto-mode-alist))
+(setq frame-background-mode 'dark)
+(add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
