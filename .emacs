@@ -317,7 +317,7 @@
 ; coffee-mode
 ;====================================
 (require 'coffee-mode)
-(add-to-list 'auto-mode-alist '("\\.shd$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(js.shd\\|coffee\\)$" . coffee-mode))
 (setq coffee-tab-width 2)
 
 ; shadow
