@@ -23,17 +23,8 @@
 (setq auto-save-default nil)
 
 ;===================================
-; Anthy
-;    CTRL-\で入力モード切替え
-;===================================
-;(load-library "anthy")
-;(setq default-input-method "japanese-anthy")
-
-;===================================
 ; Wheel mouse
 ;===================================
-;(global-set-key [mouse-4] 'scroll-down)
-;(global-set-key [mouse-5] 'scroll-up)
 (mouse-wheel-mode)
 (defun up-slightly () (interactive) (scroll-up 5))
 (defun down-slightly () (interactive) (scroll-down 5))
@@ -103,19 +94,6 @@
 (set-fontset-font "fontset-default" 'katakana-jisx0201
                   '("ヒラギノ角ゴ pro w3" . "jisx0201.1976"))
 
-;(create-fontset-from-mac-roman-font
-;  "-apple-consolas-medium-r-normal--24-*-*-*-m-0-mac-roman" nil "consolas")
-;(set-fontset-font "fontset-consolas" 'japanese-jisx0208
-;                  '("ヒラギノ角ゴ pro w3" . "jisx0208.1983"))
-;(set-fontset-font "fontset-consolas" 'katakana-jisx0201
-;                  '("ヒラギノ角ゴ pro w3" . "jisx0201.1976"))
-;(add-to-list 'default-frame-alist '(font . "fontset-consolas"))
-;(setcdr (assoc 'font default-frame-alist) "fontset-consolas")
-
-;(set-default-font "Consolas-14")
-;(set-fontset-font (frame-parameter nil 'font)
-;		  'japanese-jisx0208
-;		  '("M+1MN+IPAG" . "unicode-bmp"))
 
 ;====================================
 ; Initial フレームサイズ,位置,色,フォントなど
@@ -294,13 +272,6 @@
 (setq auto-mode-alist
       (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-function #'cssm-c-style-indenter)
-
-;====================================
-; ECMAScript mode
-;====================================
-;(setq auto-mode-alist
-;      (append '(("\\.js$" . js-mode))
-;              auto-mode-alist))
 
 ;====================================
 ; js2-mode
