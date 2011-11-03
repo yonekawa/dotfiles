@@ -19,36 +19,6 @@
 
 ;(add-to-list load-path (cons "~/.emacs.d/auto-install/" load-path))
 
-;===================================
-; Wheel mouse
-;===================================
-(mouse-wheel-mode t)
-(defun up-slightly () (interactive) (scroll-up 5))
-(defun down-slightly () (interactive) (scroll-down 5))
-(global-set-key [mouse-4] 'down-slightly)
-(global-set-key [mouse-5] 'up-slightly)
-
-(defun up-one () (interactive) (scroll-up 1))
-(defun down-one () (interactive) (scroll-down 1))
-(global-set-key [S-mouse-4] 'down-one)
-(global-set-key [S-mouse-5] 'up-one)
-
-(defun up-a-lot () (interactive) (scroll-up))
-(defun down-a-lot () (interactive) (scroll-down))
-(global-set-key [C-mouse-4] 'down-a-lot)
-(global-set-key [C-mouse-5] 'up-a-lot)
-
-(defun scroll-down-with-lines ()
-  "" (interactive) (scroll-down 3))
-(defun scroll-up-with-lines ()
-  "" (interactive) (scroll-up 3))
-(global-set-key [wheel-up] 'scroll-down-with-lines)
-(global-set-key [wheel-down] 'scroll-up-with-lines)
-(global-set-key [double-wheel-up] 'scroll-down-with-lines)
-(global-set-key [double-wheel-down] 'scroll-up-with-lines)
-(global-set-key [triple-wheel-up] 'scroll-down-with-lines)
-(global-set-key [triple-wheel-down] 'scroll-up-with-lines)
-
 ;====================================
 ; Frame size/Position/Color
 ;====================================
@@ -62,10 +32,40 @@
                '(width . 80)                   ;; フレームの幅
                '(height . 30)                  ;; フレームの高さ
                '(top . 0)                      ;; Y 表示位置
-               '(left . 10)                   ;; X 表示位置
+               '(left . 10)                    ;; X 表示位置
                )
               initial-frame-alist))
 (setq default-frame-alist initial-frame-alist)
+
+;===================================
+; Wheel mouse
+;===================================
+;(mouse-wheel-mode t)
+;(defun up-slightly () (interactive) (scroll-up 5))
+;(defun down-slightly () (interactive) (scroll-down 5))
+;(global-set-key [mouse-4] 'down-slightly)
+;(global-set-key [mouse-5] 'up-slightly)
+
+;(defun up-one () (interactive) (scroll-up 1))
+;(defun down-one () (interactive) (scroll-down 1))
+;(global-set-key [S-mouse-4] 'down-one)
+;(global-set-key [S-mouse-5] 'up-one)
+
+;(defun up-a-lot () (interactive) (scroll-up))
+;(defun down-a-lot () (interactive) (scroll-down))
+;(global-set-key [C-mouse-4] 'down-a-lot)
+;(global-set-key [C-mouse-5] 'up-a-lot)
+
+;(defun scroll-down-with-lines ()
+;  "" (interactive) (scroll-down 3))
+;(defun scroll-up-with-lines ()
+;  "" (interactive) (scroll-up 3))
+;(global-set-key [wheel-up] 'scroll-down-with-lines)
+;(global-set-key [wheel-down] 'scroll-up-with-lines)
+;(global-set-key [double-wheel-up] 'scroll-down-with-lines)
+;(global-set-key [double-wheel-down] 'scroll-up-with-lines)
+;(global-set-key [triple-wheel-up] 'scroll-down-with-lines)
+;(global-set-key [triple-wheel-down] 'scroll-up-with-lines)
 
 ;====================================
 ; Misc
@@ -79,6 +79,8 @@
 (setq frame-title-format   ;; フレームのタイトル指定
       (concat "%b - emacs@" system-name))
 
+(setq highlight-nonselected-windows t) 
+(setq next-line-add-newlines nil) ;バッファ末尾に余計な改行コードを防ぐ
 (windmove-default-keybindings) ;; Shitf矢印で移動
 (setq pc-select-selection-keys-only t) ;; Shift + 矢印で選択
 (setq inhibit-startup-message t) ;; 最初のメッセージを隠す
@@ -124,6 +126,10 @@
 (autoload 'ac-mode "ac-mode" "Minor mode for advanced completion." t nil)
 (setq ac-mode-goto-end-of-word t)
 
+;;; kill-summary
+(autoload 'kill-summary "kill-summary" nil t)
+(define-key global-map "\ey" 'kill-summary)
+
 ;;; 対応する括弧をハイライト
 (show-paren-mode t)
 
@@ -152,6 +158,9 @@
   (interactive)
   (let ((grep-find-command "ack -a --nocolor --nogroup "))
     (call-interactively 'grep-find)))
+
+;;; vc-gitが遅いのでオフ
+;(delete 'Git vc-handled-backends)
 
 ;====================================
 ; Key mapping
@@ -216,8 +225,8 @@
 (set-face-attribute 'default nil
                     :family "consolas"
                     :height 180)
-(set-fontset-font nil 'japanese-jisx0208 '("ヒラギノ角ゴ*" . "jisx0208.*"))
-(set-fontset-font nil 'katakana-jisx0201 '("ヒラギノ角ゴ*" . "jisx0201.*"))
+(set-fontset-font nil 'japanese-jisx0208 '("OSAKA" . "jisx0208.*"))
+(set-fontset-font nil 'katakana-jisx0201 '("OSAKA" . "jisx0201.*"))
 
 ;; 日本語フォントの幅をASCIIの倍に調整
 (setq face-font-rescale-alist '(("-jisx02[^-]*-[^-]*\\'" . 1.2)))
@@ -341,11 +350,6 @@
 (add-hook 'php-mode-hook 'my-snippet-php)
 
 ;====================================
-; vc-gitが遅いのでオフ
-;====================================
-(delete 'Git vc-handled-backends)
-
-;====================================
 ; diff-mode
 ;====================================
 (autoload 'diff-mode "diff-mode" "Diff major mode" t)
@@ -361,6 +365,16 @@
             (set-face-background 'diff-added-face "gray26")
             (set-face-foreground 'diff-changed-face "DeepSkyBlue1")
             ))
+
+;====================================
+; rst-mode (sphinx)
+;====================================
+(require 'rst)
+(setq auto-mode-alist
+      (append '(("\\.rst$" . rst-mode)
+                ("\\.rest$" . rst-mode)) auto-mode-alist))
+(setq frame-background-mode 'dark)
+(add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
 ;====================================
 ; viper-mode
@@ -379,13 +393,3 @@
 (define-key viper-insert-global-user-map "\C-w" 'clipboard-kill-region)
 (define-key viper-vi-global-user-map "\C-z" 'indent-region)
 (define-key viper-insert-global-user-map "\C-z" 'indent-region)
-
-;====================================
-; rst (sphinx)
-;====================================
-(require 'rst)
-(setq auto-mode-alist
-      (append '(("\\.rst$" . rst-mode)
-                ("\\.rest$" . rst-mode)) auto-mode-alist))
-(setq frame-background-mode 'dark)
-(add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
