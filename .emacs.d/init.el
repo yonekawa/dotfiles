@@ -129,8 +129,15 @@
 (setq ac-mode-goto-end-of-word t)
 
 ;;; kill-summary
-(autoload 'kill-summary "kill-summary" nil t)
-(define-key global-map "\ey" 'kill-summary)
+;(autoload 'kill-summary "kill-summary" nil t)
+;(define-key global-map "\ey" 'kill-summary)
+
+;;; browse-kill-ring
+(require 'browse-kill-ring)
+(global-set-key "\M-y" 'browse-kill-ring)
+(add-hook 'browse-kill-ring-hook
+          (lambda ()
+            (define-key browse-kill-ring-mode-map (kbd "\C-g") 'browse-kill-ring-quit)))
 
 ;;; 対応する括弧をハイライト
 (show-paren-mode t)
