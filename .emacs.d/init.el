@@ -85,6 +85,8 @@
 (setq pc-select-selection-keys-only t) ;; Shift + 矢印で選択
 (setq inhibit-startup-message t) ;; 最初のメッセージを隠す
 
+(setq gc-cons-threshold 5242880)
+
 ;; 全角空白やタブ文字に色づけ
 (defface my-face-b-2 '((t (:background "gray26"))) nil)
 (defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil)
@@ -160,7 +162,7 @@
     (call-interactively 'grep-find)))
 
 ;;; vc-gitが遅いのでオフ
-;(delete 'Git vc-handled-backends)
+(delete 'Git vc-handled-backends)
 
 ;====================================
 ; Key mapping
@@ -225,8 +227,26 @@
 (set-face-attribute 'default nil
                     :family "consolas"
                     :height 180)
-(set-fontset-font nil 'japanese-jisx0208 '("OSAKA" . "jisx0208.*"))
-(set-fontset-font nil 'katakana-jisx0201 '("OSAKA" . "jisx0201.*"))
+(set-fontset-font
+ (frame-parameter nil 'font)
+ 'japanese-jisx0208
+ '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+(set-fontset-font
+ (frame-parameter nil 'font)
+ 'japanese-jisx0212
+ '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
+(set-fontset-font
+ (frame-parameter nil 'font)
+ 'mule-unicode-0100-24ff
+ '("monaco" . "iso10646-1"))
+(setq face-font-rescale-alist
+     '(("^-apple-hiragino.*" . 1.2)
+       (".*osaka-bold.*" . 1.2)
+       (".*osaka-medium.*" . 1.2)
+       (".*courier-bold-.*-mac-roman" . 1.0)
+       (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+       (".*monaco-bold-.*-mac-roman" . 0.9)
+       ("-cdac$" . 1.3)))
 
 ;; 日本語フォントの幅をASCIIの倍に調整
 (setq face-font-rescale-alist '(("-jisx02[^-]*-[^-]*\\'" . 1.2)))
