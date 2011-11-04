@@ -285,6 +285,7 @@
 
 ; shadow
 ;====================================
+;(setq shadow-suffix "coffee")
 (require 'shadow)
 (add-hook 'find-file-hooks 'shadow-on-find-file)
 (add-hook 'shadow-find-unshadow-hook
