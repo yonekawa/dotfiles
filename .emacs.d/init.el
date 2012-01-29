@@ -36,6 +36,7 @@
                )
               initial-frame-alist))
 (setq default-frame-alist initial-frame-alist)
+(set-face-foreground 'minibuffer-prompt "green")
 
 ;===================================
 ; Wheel mouse
