@@ -274,6 +274,20 @@
 (defvar org-directory "")
 (require 'anything-startup)
 
+(defun my-anything-filelist+ ()
+  (interactive)
+  (anything-other-buffer
+   '(anything-c-source-files-in-current-dir+
+     anything-c-source-buffers+
+     anything-c-source-recentf
+     anything-c-source-mac-spotlight
+     anything-c-source-locate)
+   " *my-anything-filelist+*"))
+
+(global-set-key "\C-x\C-b" 'anything-buffers+)
+(global-set-key "\C-x\C-v" 'find-file)
+(global-set-key "\C-x\C-f" 'my-anything-filelist+)
+
 ;====================================
 ; elscreen
 ;====================================
@@ -406,17 +420,17 @@
 ;====================================
 ; viper-mode
 ;====================================
-(setq viper-mode 't)
-(setq viper-inhibit-startup-message 't)
-(require 'viper)
+;; (setq viper-mode 't)
+;; (setq viper-inhibit-startup-message 't)
+;; (require 'viper)
 
-;;; DELとBSで前の改行を削除
-(define-key viper-vi-global-user-map [backspace] 'backward-delete-char-untabify)
-(define-key viper-vi-global-user-map [delete] 'delete-char)
-(define-key viper-insert-global-user-map [backspace] 'backward-delete-char-untabify)
-(define-key viper-insert-global-user-map [delete] 'delete-char)
+;; ;;; DELとBSで前の改行を削除
+;; (define-key viper-vi-global-user-map [backspace] 'backward-delete-char-untabify)
+;; (define-key viper-vi-global-user-map [delete] 'delete-char)
+;; (define-key viper-insert-global-user-map [backspace] 'backward-delete-char-untabify)
+;; (define-key viper-insert-global-user-map [delete] 'delete-char)
 
-(define-key viper-vi-global-user-map "\C-y" 'yank)
-(define-key viper-insert-global-user-map "\C-w" 'clipboard-kill-region)
-(define-key viper-vi-global-user-map "\C-z" 'indent-region)
-(define-key viper-insert-global-user-map "\C-z" 'indent-region)
+;; (define-key viper-vi-global-user-map "\C-y" 'yank)
+;; (define-key viper-insert-global-user-map "\C-w" 'clipboard-kill-region)
+;; (define-key viper-vi-global-user-map "\C-z" 'indent-region)
+;; (define-key viper-insert-global-user-map "\C-z" 'indent-region)
