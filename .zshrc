@@ -39,17 +39,57 @@ alias ks='ls'
 alias screen='screen -r'
 alias brewupdate='brew update && brew upgrade'
 
-preexec() {
-#    echo -ne "\ek#${1%% *}\e\\"
-}
-precmd() {
-#    echo -ne "\ek$(basename $(pwd))\e\\"
-}
-
+##
 # git completion
 # wget -O ~/.git-completion.bash "http://git.kernel.org/?p=git/git.git;a=blob_plain;f=contrib/completion/git-completion.bash;h=893b7716cafa4811d237480a980140d308aa20dc;hb=01b97a4cb60723d18b437efdc474503d2a9dd384"
+##
 if [ -f "$HOME/.git-completion.bash" ]; then
   autoload bashcompinit
   bashcompinit
   source $HOME/.git-completion.bash
 fi
+
+##
+#  Display cwd or command running.
+#  Comment out condition because $TERM returns 'xterm-color'.
+##
+#if [ "$TERM" = "screen" ]; then
+    chpwd () { echo -n "_`dirs`\\" }
+    preexec() {
+        emulate -L zsh
+        local -a cmd; cmd=(${(z)2})
+        case $cmd[1] in
+            fg)
+                if (( $#cmd == 1 )); then
+                    cmd=(builtin jobs -l %+)
+                else
+                    cmd=(builtin jobs -l $cmd[2])
+                fi
+                ;;
+            %*)
+                cmd=(builtin jobs -l $cmd[1])
+                ;;
+            cd)
+                if (( $#cmd == 2)); then
+                    cmd[1]=$cmd[2]
+                fi
+                ;&
+                *)
+    echo -n "k$cmd[1]:t\\"
+    return
+    ;;
+    esac
+
+    local -A jt; jt=(${(kv)jobtexts})
+
+    $cmd >>(read num rest
+        cmd=(${(z)${(e):-\$jt$num}})
+        echo -n "k$cmd[1]:t\\") 2>/dev/null
+    }
+    chpwd
+#fi
+#if [ "$TERM" = "screen" ]; then
+    precmd(){
+        screen -X title $(basename $(print -P "%~"))
+    }
+#fi
