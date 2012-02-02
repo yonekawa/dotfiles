@@ -69,12 +69,18 @@
 ;(global-set-key [triple-wheel-down] 'scroll-up-with-lines)
 
 ;====================================
+; GUI Dependency
+;====================================
+(if window-system
+    (scroll-bar-mode nil)) ;; スクロールバーを隠す
+(if window-system
+    (tool-bar-mode 0))     ;; ツールバーを隠す
+
+;====================================
 ; Misc
 ;====================================
 (global-font-lock-mode t)  ;; 文字の色つけ
 (display-time)             ;; 時計を表示
-(tool-bar-mode 0)          ;; ツールバーを隠す
-(scroll-bar-mode nil)      ;; スクロールバーを隠す
 (setq line-number-mode t)  ;; カーソルのある行番号を表示
 (auto-compression-mode t)  ;; 日本語infoの文字化け防止
 (setq frame-title-format   ;; フレームのタイトル指定
@@ -235,18 +241,22 @@
 (set-face-attribute 'default nil
                     :family "consolas"
                     :height 180)
-(set-fontset-font
- (frame-parameter nil 'font)
- 'japanese-jisx0208
- '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-(set-fontset-font
- (frame-parameter nil 'font)
- 'japanese-jisx0212
- '("Hiragino Kaku Gothic Pro" . "iso10646-1"))
-(set-fontset-font
- (frame-parameter nil 'font)
- 'mule-unicode-0100-24ff
- '("monaco" . "iso10646-1"))
+(if window-system
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     'japanese-jisx0208
+     '("Hiragino Kaku Gothic Pro" . "iso10646-1")))
+(if window-system
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     'japanese-jisx0212
+     '("Hiragino Kaku Gothic Pro" . "iso10646-1")))
+(if window-system
+    (set-fontset-font
+     (frame-parameter nil 'font)
+     'mule-unicode-0100-24ff
+     '("monaco" . "iso10646-1")))
+
 (setq face-font-rescale-alist
      '(("^-apple-hiragino.*" . 1.2)
        (".*osaka-bold.*" . 1.2)
