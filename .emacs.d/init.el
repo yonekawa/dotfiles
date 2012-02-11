@@ -234,6 +234,12 @@
 (iswitchb-default-keybindings)
 
 ;====================================
+; zlc.el
+; zsh like completion
+;====================================
+(require 'zlc)
+
+;====================================
 ; yacomplete
 ;  Improvement minibuffer search.
 ;====================================
@@ -433,3 +439,7 @@
 (setq frame-background-mode 'dark)
 (add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
+;====================================
+; flymake
+;====================================
+(require 'flymake)
