@@ -433,20 +433,3 @@
 (setq frame-background-mode 'dark)
 (add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
-;====================================
-; viper-mode
-;====================================
-;; (setq viper-mode 't)
-;; (setq viper-inhibit-startup-message 't)
-;; (require 'viper)
-
-;; ;;; DELとBSで前の改行を削除
-;; (define-key viper-vi-global-user-map [backspace] 'backward-delete-char-untabify)
-;; (define-key viper-vi-global-user-map [delete] 'delete-char)
-;; (define-key viper-insert-global-user-map [backspace] 'backward-delete-char-untabify)
-;; (define-key viper-insert-global-user-map [delete] 'delete-char)
-
-;; (define-key viper-vi-global-user-map "\C-y" 'yank)
-;; (define-key viper-insert-global-user-map "\C-w" 'clipboard-kill-region)
-;; (define-key viper-vi-global-user-map "\C-z" 'indent-region)
-;; (define-key viper-insert-global-user-map "\C-z" 'indent-region)
