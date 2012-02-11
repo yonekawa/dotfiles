@@ -36,7 +36,6 @@
                )
               initial-frame-alist))
 (setq default-frame-alist initial-frame-alist)
-(set-face-foreground 'minibuffer-prompt "green")
 
 ;===================================
 ; Wheel mouse
@@ -206,11 +205,11 @@
   (set-buffer-modified-p nil)
   (find-alternate-file (dired-get-filename)))
 
-;====================================
+;==========================================
 ; session.el
 ;  Emacsを終了してもファイルを編集してた位置や
 ;  minibuffer への入力内容を覚えててくれます。
-;====================================
+;==========================================
 (when (require 'session nil t)
 (setq session-initialize '(de-saveplace session keys menus places)
       session-globals-include '((kill-ring 50)
@@ -220,11 +219,11 @@
 (setq history-length t)
 (add-hook 'after-init-hook 'session-initialize))
 
-;=======================
+;====================================
 ; iswitchb
-;  C-x bを便利に
+;  Improvement switch buffer
 ;  http://tinyurl.com/8psug
-;=======================
+;====================================
 (require 'iswitchb)
 (add-hook 'iswitchb-define-mode-map-hook
         (lambda ()
@@ -233,6 +232,13 @@
           (define-key iswitchb-mode-map "\C-f" 'iswitchb-next-match)
           (define-key iswitchb-mode-map "\C-b" 'iswitchb-prev-match)))
 (iswitchb-default-keybindings)
+
+;====================================
+; yacomplete
+;  Improvement minibuffer search.
+;====================================
+(require 'yaicomplete)
+(yaicomplete-mode)
 
 ;====================================
 ; Fonts
