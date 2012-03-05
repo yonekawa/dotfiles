@@ -85,7 +85,7 @@
 (setq frame-title-format   ;; フレームのタイトル指定
       (concat "%b - emacs@" system-name))
 
-(setq highlight-nonselected-windows t) 
+(setq highlight-nonselected-windows t)
 (setq next-line-add-newlines nil) ;バッファ末尾に余計な改行コードを防ぐ
 (windmove-default-keybindings) ;; Shitf矢印で移動
 (setq pc-select-selection-keys-only t) ;; Shift + 矢印で選択
@@ -102,8 +102,9 @@
 (defadvice font-lock-mode (before my-font-lock-mode ())
   (font-lock-add-keywords
    major-mode
-   '(("	" 0 my-face-b-2 append)
-     ("[ 	]+$" 0 my-face-u-1 append)
+   '(("　" 0 my-face-b-2 append)
+     ("\t" 0 my-face-b-2 append)
+     ("[ ]+$" 0 my-face-u-1 append)
      )))
 (setq-default transient-mark-mode t)
 (ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
@@ -194,6 +195,7 @@
 (define-key global-map "\C-x\C-h" 'help-command)
 (define-key global-map "\M-a"     'ack)
 (define-key ctl-x-map  "l"        'goto-line)
+(global-set-key (kbd "M-RET") 'ns-toggle-fullscreen)
 
 ;====================================
 ; Dired
@@ -403,7 +405,7 @@
 ; coffee-mode
 ;====================================
 (require 'coffee-mode)
-(add-to-list 'auto-mode-alist '("\\.\\(js.shd\\|coffee\\)$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (setq coffee-tab-width 2)
 
 ;====================================
