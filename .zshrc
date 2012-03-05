@@ -33,6 +33,9 @@ export PATH=/usr/local/bin:$PATH
 if [ -d "$HOME/bin" ] ; then
   export PATH="$HOME/bin:$PATH"
 fi
+if [ -d "$HOME/node_modules/.bin" ] ; then
+  export PATH="$HOME/node_modules/.bin:$PATH"
+fi
 
 alias ls='ls --color=auto -h'
 alias ks='ls'

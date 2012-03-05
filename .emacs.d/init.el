@@ -362,6 +362,8 @@
             (setq sgml-basic-offset 2)
             (setq indent-tabs-mode nil)))
 
+(setq auto-mode-alist  (cons '("\\.rhtml$" . html-mode) auto-mode-alist))
+
 ;====================================
 ; CSS mode
 ;====================================
@@ -370,6 +372,22 @@
       (cons '("\\.css\\'" . css-mode) auto-mode-alist))
 (setq cssm-indent-level 2)
 (setq cssm-indent-function #'cssm-c-style-indenter)
+
+;====================================
+; Ruby on Rails
+;====================================
+(defun try-complete-abbrev (old)
+  (if (expand-abbrev) t nil))
+
+(setq hippie-expand-try-functions-list
+      '(try-complete-abbrev
+        try-complete-file-name
+        try-expand-dabbrev))
+(setq rails-use-mongrel t)
+(require 'rails)
+
+(define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
+(define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
 
 ;====================================
 ; js2-mode
