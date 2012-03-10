@@ -52,47 +52,11 @@ if [ -f "$HOME/.git-completion.bash" ]; then
   source $HOME/.git-completion.bash
 fi
 
-##
-#  Display cwd or command running.
-#  Comment out condition because $TERM returns 'xterm-color'.
-##
-#if [ "$TERM" = "screen" ]; then
-    chpwd () { echo -n "_`dirs`\\" }
+if [ $TERM = xterm-color ];then
     preexec() {
-        emulate -L zsh
-        local -a cmd; cmd=(${(z)2})
-        case $cmd[1] in
-            fg)
-                if (( $#cmd == 1 )); then
-                    cmd=(builtin jobs -l %+)
-                else
-                    cmd=(builtin jobs -l $cmd[2])
-                fi
-                ;;
-            %*)
-                cmd=(builtin jobs -l $cmd[1])
-                ;;
-            cd)
-                if (( $#cmd == 2)); then
-                    cmd[1]=$cmd[2]
-                fi
-                ;&
-                *)
-    echo -n "k$cmd[1]:t\\"
-    return
-    ;;
-    esac
-
-    local -A jt; jt=(${(kv)jobtexts})
-
-    $cmd >>(read num rest
-        cmd=(${(z)${(e):-\$jt$num}})
-        echo -n "k$cmd[1]:t\\") 2>/dev/null
+        echo -ne "\ek#${1%% *}\e\\"
     }
-    chpwd
-#fi
-#if [ "$TERM" = "screen" ]; then
-    precmd(){
-        screen -X title $(basename $(print -P "%~"))
+    precmd() {
+        echo -ne "\ek$(basename $(pwd))\e\\"
     }
-#fi
+fi

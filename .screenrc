@@ -17,7 +17,7 @@ defbce "on"
 defhstatus "screen [^En:^Et] <${USER}@${HOST}:${PWD}>"
 hardstatus alwayslastline "%{= gk}[%m/%d %02c] %{gW} %-w%{= wk}%n %t%{-}%+w %=%{gk}$USER@%H(%l) "
 
-#caption always "[%02c] $USER@$HOST %`%-w%{=b bw}%n %t%{-}%+w"
+# caption always "%{= wk} %-w%?%F%{=b kr}%:%{= kW}%? %n %t %{-}%+w"
 
 bind u eval "encoding utf-8" "!!!echo 'export LANG=ja_JP.UTF-8'"
 bind e eval "encoding euc" "!!!echo 'export LANG=ja_JP.EUC-JP'"
