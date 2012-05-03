@@ -90,6 +90,7 @@
 (windmove-default-keybindings) ;; Shitf矢印で移動
 (setq pc-select-selection-keys-only t) ;; Shift + 矢印で選択
 (setq inhibit-startup-message t) ;; 最初のメッセージを隠す
+(setq initial-scratch-message nil)
 
 (setq gc-cons-threshold 5242880)
 
