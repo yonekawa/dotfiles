@@ -1,8 +1,8 @@
 term xterm-color
 shell -/bin/zsh
 
-#escape "^Zz"
-escape "^Ee"
+escape "^Zz"
+#escape "^Ee"
 
 autodetach on
 vbell off
