@@ -24,7 +24,7 @@ ZSH_THEME="cloud"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew extract osx node svn)
+plugins=(git brew extract osx node npm ruby rails3 autojump)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -40,7 +40,7 @@ fi
 alias ls='ls --color=auto -h'
 alias ks='ls'
 alias screen='screen -r'
-alias brewupdate='brew update && brew upgrade'
+alias brewup='brew update && brew upgrade'
 
 ##
 # git completion
@@ -73,3 +73,10 @@ if [[ -f ~/.nvm/nvm.sh ]]; then
     unset _nodejs_use_version
   fi
 fi
+
+if [[ -d /usr/local/Cellar/android-sdk ]]; then
+  export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
+fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
