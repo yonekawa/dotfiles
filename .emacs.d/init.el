@@ -331,6 +331,11 @@
      (setq indent-tabs-mode nil)))
 
 ;====================================
+; snippet
+;====================================
+(require 'snippet)
+
+;====================================
 ; php-mode
 ;====================================
 (autoload 'php-mode "php-mode" "Mode for editing PHP source files")
@@ -353,9 +358,18 @@
              (add-to-list 'ac-sources 'ac-source-php-completion)
              (auto-complete-mode t))))
 
-;;; Smarty
 (add-to-list 'auto-mode-alist (cons "\\.tpl\\'" 'smarty-mode))
 (autoload 'smarty-mode "smarty-mode" "Smarty Mode" t)
+
+(defun my-snippet-php ()
+  (define-abbrev-table 'php-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'php-mode-abbrev-table
+   ("aks"      .  "array_keys($${array})")
+   ("ake"      .  "array_key_exists($${key}, $${array})")
+   ("req1"     .  "require_once( '$${filepath}' );")
+   ("v"        .  "var_dump($${variable});")))
+(add-hook 'php-mode-hook 'my-snippet-php)
 
 ;====================================
 ; HTML mode
@@ -379,12 +393,9 @@
 ;====================================
 ; Ruby
 ;====================================
-
-;; ruby-electric.el
 (require 'ruby-electric)
 (add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
 
-;; ruby-block.el
 (require 'ruby-block)
 (ruby-block-mode t)
 (setq ruby-block-highlight-toggle t)
@@ -401,6 +412,14 @@
 
 (define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
 (define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
+
+;(defun my-snippet-ruby ()
+;  (define-abbrev-table 'ruby-mode-abbrev-table '())
+;  (snippet-with-abbrev-table
+;   'ruby-mode-abbrev-table
+;  )
+;)
+;(add-hook 'ruby-mode-hook 'my-snippet-ruby)
 
 ;====================================
 ; js2-mode
@@ -426,22 +445,6 @@
 (add-hook 'find-file-hooks 'shadow-on-find-file)
 (add-hook 'shadow-find-unshadow-hook
           (lambda () (auto-revert-mode 1)))
-
-;====================================
-; snippet
-;====================================
-(load "snippet")
-
-(defun my-snippet-php ()
-  (define-abbrev-table 'php-mode-abbrev-table '())
-  (snippet-with-abbrev-table
-   'php-mode-abbrev-table
-   ("aks"      .  "array_keys($${array})")
-   ("ake"      .  "array_key_exists($${key}, $${array})")
-   ("req1"     .  "require_once( '$${filepath}' );")
-   ("v"        .  "var_dump($${variable});")))
-
-(add-hook 'php-mode-hook 'my-snippet-php)
 
 ;====================================
 ; diff-mode
