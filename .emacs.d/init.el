@@ -177,7 +177,7 @@
     (call-interactively 'grep-find)))
 
 ;;; vc-gitが遅いのでオフ
-(delete 'Git vc-handled-backends)
+;(delete 'Git vc-handled-backends)
 
 ;====================================
 ; Key mapping
@@ -377,8 +377,18 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;====================================
-; Ruby on Rails
+; Ruby
 ;====================================
+
+;; ruby-electric.el
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+
+;; ruby-block.el
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
+
 (defun try-complete-abbrev (old)
   (if (expand-abbrev) t nil))
 
@@ -464,3 +474,22 @@
 ; flymake
 ;====================================
 (require 'flymake)
+
+;; ruby
+(defun flymake-ruby-init ()
+  (let* ((temp-file   (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+          (local-file  (file-relative-name
+                       temp-file
+                       (file-name-directory buffer-file-name))))
+    (list "ruby" (list "-c" local-file))))
+
+(push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
+(push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
+(push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3) flymake-err-line-patterns)
+
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+             ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
+             (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+                 (flymake-mode t))))
