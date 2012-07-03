@@ -41,6 +41,7 @@ alias ls='ls --color=auto -h'
 alias ks='ls'
 alias screen='screen -r'
 alias brewup='brew update && brew upgrade'
+alias be='bundle exec'
 
 ##
 # git completion
@@ -80,3 +81,5 @@ fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+export USE_BUNDLER=1
