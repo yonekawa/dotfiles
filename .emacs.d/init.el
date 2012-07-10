@@ -422,6 +422,14 @@
 ;(add-hook 'ruby-mode-hook 'my-snippet-ruby)
 
 ;====================================
+; haml-mode
+;====================================
+(add-hook 'haml-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (define-key haml-mode-map "\C-m" 'newline-and-indent)))
+
+;====================================
 ; js2-mode
 ;====================================
 (autoload 'js2-mode "js2-mode" nil t)
