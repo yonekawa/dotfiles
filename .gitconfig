@@ -7,7 +7,7 @@
 
 [alias]
   co = checkout
-  st = status -sb
+  st = status
   pr = pull --rebase
   rc = rebase --continue
   wd = diff --word-diff
@@ -20,4 +20,4 @@
   lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
   
 [push]
-	default = tracking
+  default = tracking

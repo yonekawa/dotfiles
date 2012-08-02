@@ -20,6 +20,19 @@
 ;(add-to-list load-path (cons "~/.emacs.d/auto-install/" load-path))
 
 ;====================================
+; Shell
+;====================================
+(defun skt:shell ()
+  (or (executable-find "zsh")
+      (executable-find "bash")
+      (executable-find "cmdproxy")
+      (error "can't find 'shell' command in PATH!!")))
+
+(setq shell-file-name (skt:shell))
+(setenv "SHELL" shell-file-name)
+(setq explicit-shell-file-name shell-file-name)
+
+;====================================
 ; Frame size/Position/Color
 ;====================================
 (setq initial-frame-alist
@@ -178,6 +191,8 @@
 
 ;;; vc-gitが遅いのでオフ
 ;(delete 'Git vc-handled-backends)
+
+(setq require-final-newline nil)
 
 ;====================================
 ; Key mapping
