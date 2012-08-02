@@ -428,14 +428,18 @@
 (define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
 (define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
 
+(require 'rvm)
+;; use rvm's default ruby for the current Emacs session
+(rvm-use-default)
+
 (add-to-list 'load-path "/path/to/rspec-mode")
 (require 'rspec-mode)
 
-;(defadvice rspec-compile (around rspec-compile-around)
-;  "Use BASH shell for running the specs because of ZSH issues."
-;  (let ((shell-file-name "/bin/bash"))
-;    ad-do-it))
-;(ad-activate 'rspec-compile)
+(defadvice rspec-compile (around rspec-compile-around)
+  "Use BASH shell for running the specs because of ZSH issues."
+  (let ((shell-file-name "/bin/bash"))
+    ad-do-it))
+(ad-activate 'rspec-compile)
 
 ;(defun my-snippet-ruby ()
 ;  (define-abbrev-table 'ruby-mode-abbrev-table '())
