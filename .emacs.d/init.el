@@ -62,6 +62,22 @@
               initial-frame-alist))
 (setq default-frame-alist initial-frame-alist)
 
+(require 'frame-arrange)
+
+(setq frange:size-incremental-value 5)
+(defun frange-size-inc ()
+  (interactive)
+  (frange:increment-size/current-frame))
+
+(defun frange-size-dec ()
+  (interactive)
+  (frange:decrement-size/current-frame))
+
+(define-key global-map [(C shift right)] 'frange-size-inc)
+(define-key global-map [(C shift up)] 'frange-size-inc)
+(define-key global-map [(C shift left)] 'frange-size-dec)
+(define-key global-map [(C shift down)] 'frange-size-dec)
+
 ;===================================
 ; Wheel mouse
 ;===================================
