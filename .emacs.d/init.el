@@ -65,18 +65,23 @@
 (require 'frame-arrange)
 
 (setq frange:size-incremental-value 5)
-(defun frange-size-inc ()
+(defun frange-size-inc-w ()
   (interactive)
-  (frange:increment-size/current-frame))
-
-(defun frange-size-dec ()
+  (frange:increment-size-w/current-frame))
+(defun frange-size-inc-h ()
   (interactive)
-  (frange:decrement-size/current-frame))
+  (frange:increment-size-h/current-frame))
+(defun frange-size-dec-w ()
+  (interactive)
+  (frange:decrement-size-w/current-frame))
+(defun frange-size-dec-h ()
+  (interactive)
+  (frange:decrement-size-h/current-frame))
 
-(define-key global-map [(C shift right)] 'frange-size-inc)
-(define-key global-map [(C shift up)] 'frange-size-inc)
-(define-key global-map [(C shift left)] 'frange-size-dec)
-(define-key global-map [(C shift down)] 'frange-size-dec)
+(define-key global-map [(C shift right)] 'frange-size-inc-w)
+(define-key global-map [(C shift down)] 'frange-size-inc-h)
+(define-key global-map [(C shift up)] 'frange-size-dec-h)
+(define-key global-map [(C shift left)] 'frange-size-dec-w)
 
 ;===================================
 ; Wheel mouse

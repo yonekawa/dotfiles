@@ -403,5 +403,14 @@
   (nil height #'frange:size-dec)
   (nil width #'frange:size-dec))
 
+(def:frange/current-frame increment-size-w
+  (nil width #'frange:size-inc))
+(def:frange/current-frame increment-size-h
+  (nil height #'frange:size-inc))
+
+(def:frange/current-frame decrement-size-w
+  (nil width #'frange:size-dec))
+(def:frange/current-frame decrement-size-h
+  (nil height #'frange:size-dec))
 
 (provide 'frame-arrange)
