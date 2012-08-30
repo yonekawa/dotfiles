@@ -19,6 +19,18 @@
 
 ;(add-to-list load-path (cons "~/.emacs.d/auto-install/" load-path))
 
+(dolist (dir (list
+              "/sbin"
+              "/usr/sbin"
+              "/bin"
+              "/usr/bin"
+              "/usr/local/bin"
+              (expand-file-name "~/bin")
+              ))
+ (when (and (file-exists-p dir) (not (member dir exec-path)))
+   (setenv "PATH" (concat dir ":" (getenv "PATH")))
+   (setq exec-path (append (list dir) exec-path))))
+
 ;====================================
 ; Shell
 ;====================================
@@ -49,6 +61,27 @@
                )
               initial-frame-alist))
 (setq default-frame-alist initial-frame-alist)
+
+(require 'frame-arrange)
+
+(setq frange:size-incremental-value 5)
+(defun frange-size-inc-w ()
+  (interactive)
+  (frange:increment-size-w/current-frame))
+(defun frange-size-inc-h ()
+  (interactive)
+  (frange:increment-size-h/current-frame))
+(defun frange-size-dec-w ()
+  (interactive)
+  (frange:decrement-size-w/current-frame))
+(defun frange-size-dec-h ()
+  (interactive)
+  (frange:decrement-size-h/current-frame))
+
+(define-key global-map [(C shift right)] 'frange-size-inc-w)
+(define-key global-map [(C shift down)] 'frange-size-inc-h)
+(define-key global-map [(C shift up)] 'frange-size-dec-h)
+(define-key global-map [(C shift left)] 'frange-size-dec-w)
 
 ;===================================
 ; Wheel mouse
@@ -136,6 +169,11 @@
     (t (:bold t)))
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
+
+;; show column number
+(custom-set-variables '(line-number-mode t)
+                      '(column-number-mode t)
+                      )
 
 ;;; undo
 (setq undo-limit 100000)
@@ -337,6 +375,14 @@
    (define-key global-map [(control tab)] 'elscreen-next))
 
 ;====================================
+; ispell
+;====================================
+(setq ispell-program-name "aspell")
+(setq ispell-grep-command "ack -a --nocolor --nogroup")
+(eval-after-load "ispell"
+  '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]")))
+
+;====================================
 ; c-mode
 ;====================================
 (add-hook 'c-mode-common-hook
@@ -429,12 +475,9 @@
 (define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
 
 (require 'rvm)
-;; use rvm's default ruby for the current Emacs session
 (rvm-use-default)
 
-(add-to-list 'load-path "/path/to/rspec-mode")
 (require 'rspec-mode)
-
 (defadvice rspec-compile (around rspec-compile-around)
   "Use BASH shell for running the specs because of ZSH issues."
   (let ((shell-file-name "/bin/bash"))
