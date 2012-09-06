@@ -452,6 +452,13 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;====================================
+; SCSS mode
+;====================================
+(autoload 'scss-mode "scss-mode")
+(setq scss-compile-at-save nil) ;; disable auto-compile
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+;====================================
 ; Ruby
 ;====================================
 (require 'ruby-electric)
@@ -552,6 +559,15 @@
 (setq frame-background-mode 'dark)
 (add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
+
+;====================================
+; markdown-mode
+;====================================
+(require 'markdown-mode)
+(setq auto-mode-alist
+      (append '(("\\.md$" . markdown-mode)) auto-mode-alist))
+(add-hook 'markdown-mode-hook '(lambda() (setq indent-tabs-mode nil)))
+
 ;====================================
 ; flymake
 ;====================================
@@ -575,3 +591,11 @@
              ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
              (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
                  (flymake-mode t))))
+
+;====================================
+; Monkey patch
+;====================================
+(defun indent-by-shift-tab ()
+  (interactive)
+  (indent-for-tab-command))
+(define-key global-map [(shift tab)] 'indent-by-shift-tab)
