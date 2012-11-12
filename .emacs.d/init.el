@@ -230,7 +230,7 @@
 ;;; vc-gitが遅いのでオフ
 ;(delete 'Git vc-handled-backends)
 
-(setq require-final-newline nil)
+(setq require-final-newline t)
 
 ;====================================
 ; Key mapping
@@ -491,13 +491,14 @@
     ad-do-it))
 (ad-activate 'rspec-compile)
 
-;(defun my-snippet-ruby ()
-;  (define-abbrev-table 'ruby-mode-abbrev-table '())
-;  (snippet-with-abbrev-table
-;   'ruby-mode-abbrev-table
-;  )
-;)
-;(add-hook 'ruby-mode-hook 'my-snippet-ruby)
+(defun my-snippet-ruby ()
+  (define-abbrev-table 'ruby-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'ruby-mode-abbrev-table
+   ("bp" . "binding.pry")
+  )
+)
+(add-hook 'ruby-mode-hook 'my-snippet-ruby)
 
 ;====================================
 ; haml-mode
@@ -517,12 +518,28 @@
              (progn
                (setq js2-basic-offset 2 indent-tabs-mode nil))))
 
+(defun my-snippet-js2 ()
+  (define-abbrev-table 'js2-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'js2-mode-abbrev-table
+   ("cl" . "console.log($${log});")
+   ("al" . "alert($${log});")))
+(add-hook 'js2-mode-hook 'my-snippet-js2)
+
 ;====================================
 ; coffee-mode
 ;====================================
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (setq coffee-tab-width 2)
+
+(defun my-snippet-coffee ()
+  (define-abbrev-table 'coffee-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'coffee-mode-abbrev-table
+   ("cl" . "console.log($${log})")
+   ("al" . "alert($${log})")))
+(add-hook 'coffee-mode-hook 'my-snippet-coffee)
 
 ;====================================
 ; shadow
