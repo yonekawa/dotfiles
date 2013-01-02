@@ -230,7 +230,7 @@
 ;;; vc-gitが遅いのでオフ
 ;(delete 'Git vc-handled-backends)
 
-(setq require-final-newline nil)
+(setq require-final-newline t)
 
 ;====================================
 ; Key mapping
@@ -452,6 +452,13 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 ;====================================
+; SCSS mode
+;====================================
+(autoload 'scss-mode "scss-mode")
+(setq scss-compile-at-save nil) ;; disable auto-compile
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+;====================================
 ; Ruby
 ;====================================
 (require 'ruby-electric)
@@ -484,13 +491,14 @@
     ad-do-it))
 (ad-activate 'rspec-compile)
 
-;(defun my-snippet-ruby ()
-;  (define-abbrev-table 'ruby-mode-abbrev-table '())
-;  (snippet-with-abbrev-table
-;   'ruby-mode-abbrev-table
-;  )
-;)
-;(add-hook 'ruby-mode-hook 'my-snippet-ruby)
+(defun my-snippet-ruby ()
+  (define-abbrev-table 'ruby-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'ruby-mode-abbrev-table
+   ("bp" . "binding.pry")
+  )
+)
+(add-hook 'ruby-mode-hook 'my-snippet-ruby)
 
 ;====================================
 ; haml-mode
@@ -510,12 +518,28 @@
              (progn
                (setq js2-basic-offset 2 indent-tabs-mode nil))))
 
+(defun my-snippet-js2 ()
+  (define-abbrev-table 'js2-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'js2-mode-abbrev-table
+   ("cl" . "console.log($${log});")
+   ("al" . "alert($${log});")))
+(add-hook 'js2-mode-hook 'my-snippet-js2)
+
 ;====================================
 ; coffee-mode
 ;====================================
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (setq coffee-tab-width 2)
+
+(defun my-snippet-coffee ()
+  (define-abbrev-table 'coffee-mode-abbrev-table '())
+  (snippet-with-abbrev-table
+   'coffee-mode-abbrev-table
+   ("cl" . "console.log($${log})")
+   ("al" . "alert($${log})")))
+(add-hook 'coffee-mode-hook 'my-snippet-coffee)
 
 ;====================================
 ; shadow
@@ -552,6 +576,15 @@
 (setq frame-background-mode 'dark)
 (add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
+
+;====================================
+; markdown-mode
+;====================================
+(require 'markdown-mode)
+(setq auto-mode-alist
+      (append '(("\\.md$" . markdown-mode)) auto-mode-alist))
+(add-hook 'markdown-mode-hook '(lambda() (setq indent-tabs-mode nil)))
+
 ;====================================
 ; flymake
 ;====================================
@@ -575,3 +608,11 @@
              ;; Don't want flymake mode for ruby regions in rhtml files and also on read only files
              (if (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
                  (flymake-mode t))))
+
+;====================================
+; Monkey patch
+;====================================
+(defun indent-by-shift-tab ()
+  (interactive)
+  (indent-for-tab-command))
+(define-key global-map [(shift tab)] 'indent-by-shift-tab)

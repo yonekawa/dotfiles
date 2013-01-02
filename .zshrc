@@ -62,6 +62,13 @@ if [ $TERM = xterm-color ];then
     }
 fi
 
+if [[ -f ~/bin/cdd ]]; then
+  source ~/bin/cdd
+  function chpwd() {
+    _reg_pwd_screennum
+  }
+fi
+
 if [[ -f ~/.nvm/nvm.sh ]]; then
   source ~/.nvm/nvm.sh
 
