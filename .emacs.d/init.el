@@ -500,6 +500,8 @@
 )
 (add-hook 'ruby-mode-hook 'my-snippet-ruby)
 
+(add-to-list 'auto-mode-alist '("\\.json\.jbuilder\\'" . ruby-mode))
+
 ;====================================
 ; haml-mode
 ;====================================
@@ -507,6 +509,12 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (define-key haml-mode-map "\C-m" 'newline-and-indent)))
+
+;====================================
+; yaml-mode
+;====================================
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 ;====================================
 ; js2-mode
