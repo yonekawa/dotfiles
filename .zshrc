@@ -89,8 +89,4 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-if [[ -f ~/Library/Trigger\ Toolkit/forge ]]; then
-  alias forge="~/Library/Trigger\ Toolkit/forge"
-fi
-
 export USE_BUNDLER=1
