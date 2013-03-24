@@ -86,7 +86,7 @@ if [[ -d /usr/local/Cellar/android-sdk ]]; then
   export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
 fi
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
 
 export USE_BUNDLER=1

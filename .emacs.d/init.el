@@ -296,6 +296,13 @@
 (require 'zlc)
 
 ;====================================
+;
+;====================================
+(require 'auto-complete)
+(require 'auto-complete-config)
+(global-auto-complete-mode t)
+
+;====================================
 ; yacomplete
 ;  Improvement minibuffer search.
 ;====================================
@@ -600,6 +607,12 @@
 (setq frame-background-mode 'dark)
 (add-hook 'rst-mode-hook '(lambda() (setq indent-tabs-mode nil)))
 
+;====================================
+; Ruby Motion
+;====================================
+(require 'motion-mode)
+(add-to-list 'ac-modes 'motion-mode)
+(add-hook 'ruby-mode-hook 'motion-upgrade-major-mode-if-motion-project)
 
 ;====================================
 ; markdown-mode
