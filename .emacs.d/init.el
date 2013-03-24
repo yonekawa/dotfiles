@@ -31,6 +31,11 @@
    (setenv "PATH" (concat dir ":" (getenv "PATH")))
    (setq exec-path (append (list dir) exec-path))))
 
+(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:"
+                       (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
+(setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims")
+                      (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
+
 ;====================================
 ; Shell
 ;====================================
@@ -299,8 +304,10 @@
 ;
 ;====================================
 (require 'auto-complete)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+
 (require 'auto-complete-config)
-(global-auto-complete-mode t)
+(ac-config-default)
 
 ;====================================
 ; yacomplete
@@ -491,21 +498,7 @@
       (indent-line-to indent)
       (when (> offset 0) (forward-char offset)))))
 
-(defun try-complete-abbrev (old)
-  (if (expand-abbrev) t nil))
-
-(setq hippie-expand-try-functions-list
-      '(try-complete-abbrev
-        try-complete-file-name
-        try-expand-dabbrev))
-(setq rails-use-mongrel t)
-(require 'rails)
-
-(define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
-(define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
-
-(require 'rvm)
-(rvm-use-default)
+(require 'rinari)
 
 (require 'rspec-mode)
 (defadvice rspec-compile (around rspec-compile-around)
@@ -612,6 +605,7 @@
 ;====================================
 (require 'motion-mode)
 (add-to-list 'ac-modes 'motion-mode)
+(add-to-list 'ac-sources 'ac-source-dictionary)
 (add-hook 'ruby-mode-hook 'motion-upgrade-major-mode-if-motion-project)
 
 ;====================================
