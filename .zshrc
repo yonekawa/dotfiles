@@ -62,6 +62,14 @@ if [ -d "$HOME/bin" ] ; then
   export PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d "/usr/local/opt/mysql55/bin" ] ; then
+  export PATH="/usr/local/opt/mysql55/bin:$PATH"
+fi
+
+if [ -d "/usr/local/redis-2.6/bin" ] ; then
+  export PATH="/usr/local/redis-2.6/bin:$PATH"
+fi
+
 alias ls='ls --color=auto -h'
 alias ks='ls'
 alias screen='screen -r'
@@ -92,6 +100,15 @@ if [ -f "$HOME/.git-completion.bash" ]; then
   autoload bashcompinit
   bashcompinit
   source $HOME/.git-completion.bash
+fi
+
+if [ $TERM = xterm-color ];then
+    preexec() {
+        echo -ne "\ek#${1%% *}\e\\"
+    }
+    precmd() {
+        echo -ne "\ek$(basename $(pwd))\e\\"
+    }
 fi
 
 export PATH="$HOME/.rbenv/bin:$PATH"
