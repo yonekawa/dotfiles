@@ -75,6 +75,7 @@ alias ks='ls'
 alias screen='screen -r'
 alias brewup='brew update && brew upgrade'
 alias be='bundle exec'
+alias gti='git'
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -110,6 +111,8 @@ if [ $TERM = xterm-color ];then
         echo -ne "\ek$(basename $(pwd))\e\\"
     }
 fi
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.7.0_51`
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

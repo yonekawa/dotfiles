@@ -12,12 +12,16 @@
   rc = rebase --continue
   wd = diff --word-diff
 
-  # Rebase to master by fo -> ro on branch. 
+  # Rebase to master by fo -> ro on branch.
   fo = fetch origin
   ro = rebase origin
-    
+
   # http://webtech-walker.com/archive/2010/03/04034601.html
   lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
-  
+
 [push]
   default = tracking
+
+[merge "mergepbx"]
+  name = XCode project files merger
+  driver = mergepbx %O %A %B
