@@ -76,9 +76,10 @@ alias screen='screen -r'
 alias brewup='brew update && brew upgrade'
 alias be='bundle exec'
 alias gti='git'
+alias git='git remote -v | grep origin && echo && git'
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=ja_JP.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
