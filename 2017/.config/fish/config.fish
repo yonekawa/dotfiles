@@ -31,3 +31,11 @@ function fish_user_key_bindings
   bind \cx\ck peco_kill
   bind \cj peco_recentd
 end
+
+tmux rename-window '$HOME'
+
+function pwd_chaned --on-variable PWD
+  set current_path current_path=(pwd | sed -e s/\ /_/g)
+  set current_dir (basename {$current_path})
+  tmux rename-window {$current_dir}
+end
