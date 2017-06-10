@@ -1,0 +1,31 @@
+[user]
+  name = Kenichi Yonekawa
+  email = yonekawa@freee.co.jp
+
+[color]
+  ui = auto
+
+[alias]
+  co = checkout
+  st = status
+  pr = pull --rebase
+  rc = rebase --continue
+  wd = diff --word-diff
+
+  # Rebase to master by fo -> ro on branch.
+  fo = fetch origin
+  ro = rebase origin
+
+  # http://webtech-walker.com/archive/2010/03/04034601.html
+  lg = log --graph --pretty=oneline --decorate --date=short --abbrev-commit --branches
+
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|staging$|develop$' | xargs -I % git branch -d %
+[push]
+  default = tracking
+
+[credential]
+  helper = osxkeychain
+
+[ghq]
+  root = ~/src
+

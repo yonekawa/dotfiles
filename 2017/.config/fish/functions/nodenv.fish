@@ -1,0 +1,1 @@
+/Users/yonekawa-kenichi/.config/fisherman/nodenv/functions/nodenv.fish

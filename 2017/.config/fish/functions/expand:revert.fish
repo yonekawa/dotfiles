@@ -1,0 +1,1 @@
+/Users/yonekawa-kenichi/.config/fisherman/expand/functions/expand:revert.fish

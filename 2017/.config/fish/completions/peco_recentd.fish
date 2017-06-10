@@ -1,0 +1,1 @@
+/Users/yonekawa-kenichi/.config/fisherman/peco_recentd/completions/peco_recentd.fish

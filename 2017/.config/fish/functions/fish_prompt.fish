@@ -1,0 +1,1 @@
+/Users/yonekawa-kenichi/.config/fisherman/robbyrussell/fish_prompt.fish

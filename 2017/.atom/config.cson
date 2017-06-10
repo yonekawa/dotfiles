@@ -1,0 +1,8 @@
+"*":
+  core:
+    audioBeep: false
+    closeDeletedFileTabs: true
+  editor:
+    fontFamily: "Source Han Code JP"
+  "exception-reporting":
+    userId: "dafc0fc0-720e-4469-af35-d4bd4e256b8f"
