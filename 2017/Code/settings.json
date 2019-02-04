@@ -1,0 +1,55 @@
+{
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'源ノ角ゴシック Code JP', Menlo, Monaco, 'Courier New', monospace",
+    "editor.minimap.enabled": false,
+    "editor.formatOnPaste": true,
+
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    "workbench.iconTheme": "material-icon-theme",
+    "window.zoomLevel": 0,
+
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/tmp": true,
+        "**/vendor": true,
+        "**/.happypack": true
+    },
+
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[ruby]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[erb]": {
+        "editor.tabSize": 2
+    },
+    "[python]": {
+        "editor.tabSize": 4
+    },
+    "[scss]": {
+        "editor.tabSize": 2
+    },
+
+    "eslint.autoFixOnSave": true,
+
+    "extensions.ignoreRecommendations": false,
+
+    "cSpell.ignoreRegExpList": [
+        "[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"
+    ],
+    "cSpell.userWords": [
+        "submenu",
+        "titlebar"
+    ],
+    "breadcrumbs.enabled": true,
+    "terminal.integrated.rendererType": "dom",
+}
